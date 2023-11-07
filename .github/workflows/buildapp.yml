@@ -27,11 +27,11 @@ jobs:
     - name: Generate Artifact
       run: |
         mkdir -p artifacts
-        cp target/your-java-app.jar artifacts/
+        cp /home/runner/work/Onlinebookstore_ALM/Onlinebookstore_ALM/target/onlinebookstore.war
       working-directory: ${{ github.workspace }}
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         name: java-app-artifact
-        path: artifacts/your-java-app.jar
+        path: artifacts/your-java-app.war

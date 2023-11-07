@@ -24,14 +24,13 @@ jobs:
     - name: Build with Maven
       run: mvn clean install
 
-    - name: Generate Artifact
-      run: |
-        mkdir -p artifacts
-        cp /home/runner/work/Onlinebookstore_ALM/Onlinebookstore_ALM/target/onlinebookstore.war
-      working-directory: ${{ github.workspace }}
-
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: java-app-artifact
-        path: artifacts/your-java-app.war
+    - name: Deploy to DEV
+      uses: appleboy/ssh-action@v0.3.0
+      env:
+        host: ${{ secrets.BASTION_HOST }}
+        username: ${{ secrets.BASTION_USERNAME }}
+        password: ${{ secrets.BASTION_PASSWORD }}  # Use an SSH key for security
+     
+      with: 
+           source: "./target/onlinebookstore.war"
+           target: "/home/ubuntu/Nishika_github/DEV"

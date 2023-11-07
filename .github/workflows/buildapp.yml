@@ -25,12 +25,6 @@ jobs:
       run: mvn clean install
 
     - name: Deploy to DEV
-      uses: appleboy/scp-action@master
-      env:
-        host: ${{ secrets.BASTION_HOST }}
-        username: ${{ secrets.BASTION_USERNAME }}
-        password: ${{ secrets.BASTION_PASSWORD }}  # Use an SSH key for security
-     
-      with: 
-           source: "./target/onlinebookstore.war"
-           target: "/home/ubuntu/Nishika_github/DEV"
+      run: 
+        scp -i key.pem log.txt ubuntu@44.217.154.0:/home/ubuntu/Nishika_github/DEV
+

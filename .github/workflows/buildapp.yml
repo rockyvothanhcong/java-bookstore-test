@@ -27,5 +27,5 @@ jobs:
 
     - name: Deploy File to VM
       run: |
-        scp -i ${{ secrets.BASTION_PASSWORD }} ./target/onlinebookstore.war ubuntu@44.217.154.0:/home/ubuntu/Nishika_github/DEV
+        scp -i key.pem ./target/onlinebookstore.war ubuntu@44.217.154.0:/home/ubuntu/Nishika_github/DEV
   

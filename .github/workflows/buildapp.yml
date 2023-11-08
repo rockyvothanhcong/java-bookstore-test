@@ -44,7 +44,6 @@ jobs:
      
       - name: Copy Artifact to Runner
         run: |
-         cp target/onlinebookstore.war $GITHUB_WORKSPACE
          echo "helo world"
          
   deploy_to_PROD:

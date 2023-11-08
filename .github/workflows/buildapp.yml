@@ -47,7 +47,7 @@ jobs:
          echo "helo world"
          
   deploy_to_PROD:
-    runs-on: ubuntu-19.04  # Specify a specific version of Ubuntu
+    runs-on: ubuntu-latest
     environment: PROD
     needs: deploy_to_DEV 
      

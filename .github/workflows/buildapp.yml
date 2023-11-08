@@ -39,8 +39,9 @@ jobs:
 
     steps:
       - name: Copy Artifact to Runner
-        run: cp README.md $GITHUB_WORKSPACE
-
+        run: |
+         echo "helo world"
+         
   deploy_to_PROD:
     runs-on: ubuntu-19.04  # Specify a specific version of Ubuntu
     environment: PROD
@@ -49,4 +50,5 @@ jobs:
 
     steps:
       - name: Copy Artifact to Runner
-        run: cp README.md $GITHUB_WORKSPACE
+        run: |
+         echo "deploy to prod"

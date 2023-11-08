@@ -30,6 +30,7 @@ jobs:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         KEY: ${{ secrets.PASSWORD }}
+        port: 22
     
       with:
         source: "./target/onlinebookstore.war"

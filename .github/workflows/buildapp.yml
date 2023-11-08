@@ -19,6 +19,9 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: maven
+
+    - name: Build Artifact
+      run: mvn clean package
         
   deploy_to_DEV:
     runs-on: ubuntu-20.04  # Specify a specific version of Ubuntu

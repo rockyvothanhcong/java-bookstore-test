@@ -25,6 +25,12 @@ jobs:
       run: mvn clean install
 
     - name: Deploy to DEV
-      run: 
-        scp -i key.pem log.txt ubuntu@44.217.154.0:/home/ubuntu/Nishika_github/DEV
-
+      uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        KEY: ${{ secrets.PASSWORD }}
+    
+      with:
+        source: "./target/onlinebookstore.war"
+        target: "/home/ubuntu/Nishika_github/DEV"

@@ -22,6 +22,13 @@ jobs:
 
     - name: Build Artifact
       run: mvn clean package
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+          name: your-artifact-name
+          path: target/onlinebookstore.war
+
         
   deploy_to_DEV:
     runs-on: ubuntu-20.04  # Specify a specific version of Ubuntu
@@ -29,7 +36,7 @@ jobs:
 
     steps:
       - name: Copy Artifact to Runner
-        run: cp ./target/onlinebookstore.war $GITHUB_WORKSPACE
+        run: cp target/onlinebookstore.war $GITHUB_WORKSPACE
 
       - name: Verify Deployed Artifact
         run: ls -l $GITHUB_WORKSPACE/onlinebookstore.war

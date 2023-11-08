@@ -33,13 +33,20 @@ jobs:
   deploy_to_DEV:
     runs-on: ubuntu-20.04  # Specify a specific version of Ubuntu
     needs: [build]  # Ensure the 'build' job completes before deploying
-     
+
     environment:
       name: DEV
 
     steps:
       - name: Copy Artifact to Runner
-        run: cp target/onlinebookstore.war $GITHUB_WORKSPACE
+        run: cp README.md $GITHUB_WORKSPACE
 
-      - name: Verify Deployed Artifact
-        run: ls -l $GITHUB_WORKSPACE/onlinebookstore.war
+  deploy_to_PROD:
+    runs-on: ubuntu-19.04  # Specify a specific version of Ubuntu
+    environment: PROD
+    needs: deploy_to_DEV 
+     
+
+    steps:
+      - name: Copy Artifact to Runner
+        run: cp README.md $GITHUB_WORKSPACE

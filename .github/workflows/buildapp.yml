@@ -36,10 +36,15 @@ jobs:
 
     environment:
       name: DEV
+      url: hhtp://wwww.myapp.com
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+     
       - name: Copy Artifact to Runner
         run: |
+         cp target/onlinebookstore.war $GITHUB_WORKSPACE
          echo "helo world"
          
   deploy_to_PROD:

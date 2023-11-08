@@ -27,9 +27,9 @@ jobs:
     - name: Deploy to DEV
       uses: appleboy/scp-action@master
       env:
-        HOST: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
-        KEY: ${{ secrets.PASSWORD }}
+        HOST: ${{ secrets.BASTION_HOST }}
+        USERNAME: ${{ secrets.BASTION_USERNAME }}
+        KEY: ${{ secrets.BASTION_PASSWORD }}
         port: 22
     
       with:

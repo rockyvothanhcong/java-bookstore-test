@@ -24,14 +24,8 @@ jobs:
     - name: Build with Maven
       run: mvn clean install
 
-    - name: Deploy to DEV
-      uses: appleboy/ssh-action@v0.3.0
-      env:
-        HOST: ${{ secrets.BASTION_HOST }}
-        USERNAME: ${{ secrets.BASTION_USERNAME }}
-        KEY: ${{ secrets.BASTION_PASSWORD }}
-        port: 22
-    
-      with:
-        source: "./target/onlinebookstore.war"
-        target: "/home/ubuntu/Nishika_github/DEV"
+    - name: Deploy File to VM
+      run: |
+        scp -i ${{ secrets.VM_SSH_KEY }} target/onlinebookstore.war ubuntu@44.217.154.0:/home/ubuntu/Nishika_github/DEV
+    env:
+      VM_SSH_KEY: ${{ secrets.BASTION_PASSWORD }}

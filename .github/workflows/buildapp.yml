@@ -20,14 +20,13 @@ jobs:
         distribution: 'adopt'
         cache: maven
         
-  deploy:
+  deploy_to_DEV:
     runs-on: ubuntu-20.04  # Specify a specific version of Ubuntu
-
     needs: build  # Ensure the 'build' job completes before deploying
 
     steps:
       - name: Copy Artifact to Runner
-        run: cp target/onlinebookstore.war $GITHUB_WORKSPACE
+        run: cp ./target/onlinebookstore.war $GITHUB_WORKSPACE
 
       - name: Verify Deployed Artifact
         run: ls -l $GITHUB_WORKSPACE/onlinebookstore.war

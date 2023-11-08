@@ -45,6 +45,12 @@ jobs:
       - name: Copy Artifact to Runner
         run: |
          echo "helo world"
+
+      - name: creating a file 
+        run: |
+          ls -l
+          touch File1.txt 
+          ls -l
          
   deploy_to_PROD:
     runs-on: ubuntu-latest
@@ -56,3 +62,18 @@ jobs:
       - name: Copy Artifact to Runner
         run: |
          echo "deploy to prod"
+
+
+  check_on_DEV:
+     runs-on: ubuntu-20.04  # Specify a specific version of Ubuntu
+     needs: deploy_to_PROD  # Ensure the 'build' job completes before deploying
+
+     environment:
+       name: DEV
+       url: http://wwww.myapp.com
+
+     steps:
+      - name: File check
+        run: ls -l
+
+      

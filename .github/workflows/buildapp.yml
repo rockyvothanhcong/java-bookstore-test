@@ -75,6 +75,11 @@ jobs:
          git config --global user.email "khushi.down2earth@gmail.com"
          git config --global user.name "Rupamdeep"
 
+      - name: Debug Information
+        run: |
+         echo "GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}"
+         echo "Repository URL: https://github.com/ALM-Github-ORG/Onlinebookstore_ALM.git"
+
       - name: Create Release Tag
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}

@@ -14,5 +14,5 @@ jobs:
           owner: 'ALM-Github-ORG'
           repo: 'Onlinebookstore_ALM'
           type: 'org'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.RELEASE_TOKEN }}
 

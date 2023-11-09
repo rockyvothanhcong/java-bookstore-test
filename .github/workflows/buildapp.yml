@@ -76,4 +76,15 @@ jobs:
       - name: File check
         run: ls -l
 
+      - name: Get the latest commit hash
+        id: commit_hash
+        run: echo “::set-output name=hash::$(git rev-parse --short HEAD)”
+
+      - name: Create Release Tag
+        run: |
+          latest_commit=“${{ steps.commit_hash.outputs.hash }}”
+          release_tag=“release_1.0${latest_commit}”
+          git tag -a $release_tag -m “Release $release_tag”
+          git push origin $release_tag
+
       

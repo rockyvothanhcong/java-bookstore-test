@@ -13,6 +13,6 @@ jobs:
           column: 'Backlog'
           owner: 'ALM-Github-ORG'
           repo: 'Onlinebookstore_ALM'
-          type: 'repo'
+          type: 'org'
           github_token: ${{ secrets.GITHUB_TOKEN }}
 

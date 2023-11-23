@@ -51,7 +51,7 @@ jobs:
           mkdir -p $HOME/.ssh
           echo "$SSH_PRIVATE_KEY" > $HOME/.ssh/mykey
           chmod 600 $HOME/.ssh/mykey
-          ssh -i $HOME/.ssh/mykey -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@16.16.139.252 "echo 'Hello, AWS Linux VM!'"
+          ssh -i $HOME/.ssh/mykey -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@172-31-136-116 "echo 'Hello, AWS Linux VM!'"
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
          

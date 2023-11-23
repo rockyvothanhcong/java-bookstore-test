@@ -48,9 +48,9 @@ jobs:
 
       - name: Deploy Echo
         run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/mykey
-          chmod 600 ~/.ssh/mykey
+          mkdir -p $HOME/.ssh
+          echo "$SSH_PRIVATE_KEY" > $HOME/.ssh/mykey
+          chmod 600 $HOME/.ssh/mykey
           ssh -i ~/.ssh/mykey ec2-user@16.16.139.252 "echo 'Hello, AWS Linux VM!'"
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

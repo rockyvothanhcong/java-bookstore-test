@@ -46,6 +46,7 @@ jobs:
         run: |
          echo "hello world" > solution.txt
          cat solution.txt
+         pwd
          
 
       - name: Deploy Echo

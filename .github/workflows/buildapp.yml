@@ -46,11 +46,13 @@ jobs:
         run: |
          echo "helo world"
 
-      - name: creating a file 
+      - name: Deploy Echo
         run: |
-          ls -l
-          touch File1.txt 
-          ls -l
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/mykey
+          chmod 600 ~/.ssh/mykey
+          ssh -i ~/.ssh/mykey ec2-user@16.16.139.252 "echo 'Hello, AWS Linux VM!'"
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
          
   deploy_to_PROD:
     runs-on: ubuntu-latest

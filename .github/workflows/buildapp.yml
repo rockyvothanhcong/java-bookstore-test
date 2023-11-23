@@ -44,14 +44,16 @@ jobs:
      
       - name: Copy Artifact to Runner
         run: |
-         echo "helo world"
+         echo "hello world" > solution.txt
+         cat solution.txt
+         
 
       - name: Deploy Echo
         run: |
           mkdir -p $HOME/.ssh
           echo "$SSH_PRIVATE_KEY" > $HOME/.ssh/mykey
           chmod 600 $HOME/.ssh/mykey
-          ssh -i $HOME/.ssh/mykey -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@16.16.139.252 "echo 'Hello, AWS Linux VM!'"
+          scp -i $HOME/.ssh/mykey -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@16.16.139.252:/home/ec2-user/nishika
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
          

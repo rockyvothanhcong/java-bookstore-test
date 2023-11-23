@@ -54,7 +54,7 @@ jobs:
           mkdir -p $HOME/.ssh
           echo "$SSH_PRIVATE_KEY" > $HOME/.ssh/mykey
           chmod 600 $HOME/.ssh/mykey
-          scp -i $HOME/.ssh/mykey -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@16.16.139.252:/home/ec2-user/nishika
+          scp -i $HOME/.ssh/mykey -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null solution.txt ec2-user@16.16.139.252:/home/ec2-user/nishika
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
          

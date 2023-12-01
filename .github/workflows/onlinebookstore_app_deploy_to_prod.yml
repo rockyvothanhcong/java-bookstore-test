@@ -22,5 +22,5 @@ jobs:
           cache: maven
 
       - name: Build Artifact
-        run: mvn clean package
+        run: mvn package
 

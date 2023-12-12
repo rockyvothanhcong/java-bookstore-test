@@ -56,4 +56,4 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_SECRET }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=my-project
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Onlinebookstore_ALM

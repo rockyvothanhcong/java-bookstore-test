@@ -40,24 +40,15 @@ jobs:
           distribution: 'adopt'
           cache: maven
 
-      - name: Install SonarScanner
+      - name: Download SonarQube Scanner
         run: |
-         sudo apt-get update
-         sudo apt-get install -y unzip wget openjdk-11-jre-headless
-         sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
-         sudo unzip -o sonar-scanner-cli-4.6.2.2472-linux.zip -d /opt
-         sudo rm sonar-scanner-cli-4.6.2.2472-linux.zip
-         sudo find /opt/sonar-scanner-4.6.2.2472-linux -type l -exec sh -c 'cp --remove-destination "$(readlink -f "$0")" "$0"' {} \;
-         echo "export PATH=/opt/sonar-scanner-4.6.2.2472-linux/bin:\$PATH" >> $GITHUB_ENV
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.0.2311-linux.zip
+          unzip sonar-scanner-cli-4.6.0.2311-linux.zip
+          export PATH=$PATH:$PWD/sonar-scanner-4.6.0.2311-linux/bin
 
-      - name: Sonar Scanner Version
+      - name: SonarQube Analysis
         run: |
-          /opt/sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner --version
-          
-      - name: Sonar Scan
-        run: |
-          /opt/sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
+          mvn clean package sonar:sonar \
             -Dsonar.projectKey=Onlinebookstore_ALM \
             -Dsonar.host.url=http://20.96.199.229:9000/ \
             -Dsonar.login=${{ secrets.SONAR_SECRET }}
-            -e -X

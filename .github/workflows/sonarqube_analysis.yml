@@ -50,5 +50,5 @@ jobs:
         run: |
           mvn clean package sonar:sonar \
             -Dsonar.projectKey=Onlinebookstore_ALM \
-            -Dsonar.host.url=http://20.96.199.229:9000/ \
+            -Dsonar.host.url=https://20.96.199.229:9000/ \
             -Dsonar.login=${{ secrets.SONAR_SECRET }}

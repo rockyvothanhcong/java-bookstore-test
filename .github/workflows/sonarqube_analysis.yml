@@ -1,4 +1,4 @@
-name: onlinebookstore_app_deploy_to_prod
+name: sonarqube_analysis
 
 on:
   workflow_dispatch:

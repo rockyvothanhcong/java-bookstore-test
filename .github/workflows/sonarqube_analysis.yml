@@ -26,29 +26,34 @@ jobs:
 
   analyze:
     runs-on: ubuntu-latest
-
     needs: build
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
+      - uses: actions/checkout@v2
         with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: maven
+          fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
 
-      - name: Download SonarQube Scanner
-        run: |
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.0.2311-linux.zip
-          unzip sonar-scanner-cli-4.6.0.2311-linux.zip
-          export PATH=$PATH:$PWD/sonar-scanner-4.6.0.2311-linux/bin
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
 
-      - name: SonarQube Analysis
-        run: |
-          mvn clean package sonar:sonar \
-            -Dsonar.projectKey=Onlinebookstore_ALM \
-            -Dsonar.host.url=http://20.96.199.229:9000/ \
-            -Dsonar.login=${{ secrets.SONAR_SECRET }}
+      - name: Cache SonarQube packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Build and analyze
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_SECRET }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=my-project
